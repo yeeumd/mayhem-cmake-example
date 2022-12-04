@@ -1,21 +1,21 @@
 name: Mayhem
 on:
-          push:
-                    pull_request:
-                              workflow_dispatch:
+  push:
+  pull_request:
+  workflow_dispatch:
 
-                                      env:
-                                                REGISTRY: ghcr.io
-                                                  IMAGE_NAME: ${{ github.repository }}
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
-                                                  jobs:
-                                                            build:
-                                                                        name: '${{ matrix.os }} shared=${{ matrix.shared }} ${{ matrix.build_type }}'
-                                                                            runs-on: ${{ matrix.os }}
-                                                                                strategy:
-                                                                                              matrix:
-                                                                                                              os: [ubuntu-latest]
-                                                                                                                      shared: [false]
+jobs:
+  build:
+    name: '${{ matrix.os }} shared=${{ matrix.shared }} ${{ matrix.build_type }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        shared: [false]
                                                                                                                               build_type: [Release]
                                                                                                                                       include:
                                                                                                                                                         - os: ubuntu-latest
